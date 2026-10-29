@@ -22,11 +22,13 @@ public class CategoryService implements CategoryServiceInterface {
     }
 
     public CategoryEntity getCategoryById(Long id){
-        return this.categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Categoria con el no encontrada"));
+        return this.categoryRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Categoria con el no encontrada"));
     }
 
     public CategoryEntity getCategoryByName(String name){
-        return this.categoryRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("Categoria con el nombre %s no encontrada".formatted(name)));
+        return this.categoryRepository.findByName(name)
+            .orElseThrow(() -> new ResourceNotFoundException("Categoria con el nombre %s no encontrada".formatted(name)));
     }
 
     @Override

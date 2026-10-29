@@ -1,16 +1,26 @@
-<header class="header">
-  <div class="header__container">
-    <div class="header__logo">
-      <p>SWEET HOME</p>
-    </div>
-    <nav class="header__nav">
-      <ul class="header__nav-list">
-        <li class="header__nav-item"><a href="#">Inicio</a></li>
-        <li class="header__nav-item"><a href="#">Catalogo</a></li>
-        <li class="header__nav-item"><a href="#">Categorias</a></li>
-        <li class="header__nav-item"><a href="#">Acerca de nosotros</a></li>
+<header class="w-full px-4">
+  <div class="container mx-auto max-w-7xl flex items-center justify-between ">
+    <a href="/" class="text-6xl font-bold text-bg-dark">Sweet Home</a>
+    <nav>
+      <ul class="hidden md:flex space-x-4">
+        <li><a href="#hero" class="text-bg-dark hover:text-accent">Inicio</a></li>
+        <li><a href="#catalog" class="text-bg-dark hover:text-accent">Catalogo</a></li>
+        <li><a href="#about" class="text-bg-dark hover:text-accent">Acerca de</a></li>
+        <li><a href="#categories" class="text-bg-dark hover:text-accent">Categorias</a></li>
+        <li><a href="#contact" class="text-bg-dark hover:text-accent">Contacto</a></li>
+      </ul>
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-bg-dark focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+      <ul id="mobile-menu" class="hidden flex-col space-y-2 mt-2 md:hidden">
+        <li><a href="#hero" class="text-bg-dark hover:text-accent">Inicio</a></li>
+        <li><a href="#catalog" class="text-bg-dark hover:text-accent">Catalogo</a></li>
+        <li><a href="#about" class="text-bg-dark hover:text-accent">Acerca de</a></li>
+        <li><a href="#categories" class="text-bg-dark hover:text-accent">Categorias</a></li>
+        <li><a href="#contact" class="text-bg-dark hover:text-accent">Contacto</a></li>
       </ul>
     </nav>
   </div>
-
 </header>
