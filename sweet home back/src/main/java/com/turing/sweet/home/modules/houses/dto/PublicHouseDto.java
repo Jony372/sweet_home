@@ -10,6 +10,7 @@ public record PublicHouseDto(
         String imgUrl,
         BigDecimal price,
         String category,
+        Double rating,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {

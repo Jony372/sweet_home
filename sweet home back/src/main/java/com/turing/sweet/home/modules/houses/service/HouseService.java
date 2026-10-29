@@ -8,6 +8,7 @@ import com.turing.sweet.home.modules.houses.dto.PublicHouseDto;
 import com.turing.sweet.home.modules.houses.entity.HouseEntity;
 import com.turing.sweet.home.modules.houses.mapper.HouseMapper;
 import com.turing.sweet.home.modules.houses.repository.HouseRepository;
+import com.turing.sweet.home.modules.ratings.service.RatingService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +20,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class HouseService implements HouseServiceInterface {
     private final HouseRepository houseRepository;
     private final CategoryService categoryService;
+    private final RatingService ratingService;
 
-    public HouseService(HouseRepository houseRepository, CategoryService categoryService) {
+    public HouseService(
+            HouseRepository houseRepository,
+            CategoryService categoryService,
+            RatingService ratingService
+    ) {
         this.houseRepository = houseRepository;
         this.categoryService = categoryService;
+        this.ratingService = ratingService;
     }
 
     public HouseEntity getHouseById(Long id) {
@@ -43,7 +50,7 @@ public class HouseService implements HouseServiceInterface {
                 houseReqDto.price()
         );
         System.out.println("HouseService.createHouse: house = " + house);
-        return HouseMapper.toPublicHouseDto(this.houseRepository.save(house));
+        return HouseMapper.toPublicHouseDto(this.houseRepository.save(house), 0.0);
     }
 
     @Transactional
@@ -58,12 +65,14 @@ public class HouseService implements HouseServiceInterface {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, elements, sort);
         Page<HouseEntity> houseEntities = this.houseRepository.getAllByDeletedAtIsNull(pageable);
-        return houseEntities.map(HouseMapper::toPublicHouseDto);
+        return houseEntities.map(house -> HouseMapper.toPublicHouseDto(house, this.ratingService.getRatingByHouseId(house.getHouseId())));
     }
 
     @Override
     public PublicHouseDto getPublicHouseById(Long id) {
-        return HouseMapper.toPublicHouseDto(getHouseById(id));
+        HouseEntity house = this.getHouseById(id);
+        Double rating = this.ratingService.getRatingByHouseId(house.getHouseId());
+        return HouseMapper.toPublicHouseDto(house, rating);
     }
 
     @Override
@@ -71,7 +80,7 @@ public class HouseService implements HouseServiceInterface {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, elements, sort);
         Page<HouseEntity> houseEntities = this.houseRepository.getAllByCategory_CategoryIdAndDeletedAtIsNull(categoryId, pageable);
-        return houseEntities.map(HouseMapper::toPublicHouseDto);
+        return houseEntities.map(house -> HouseMapper.toPublicHouseDto(house, this.ratingService.getRatingByHouseId(house.getHouseId())));
     }
 
     @Override
@@ -79,7 +88,7 @@ public class HouseService implements HouseServiceInterface {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(page, elements, sort);
         Page<HouseEntity> houseEntities = this.houseRepository.findAllByNameContainingIgnoreCaseAndDeletedAtIsNull(name, pageable);
-        return houseEntities.map(HouseMapper::toPublicHouseDto);
+        return houseEntities.map(house -> HouseMapper.toPublicHouseDto(house, this.ratingService.getRatingByHouseId(house.getHouseId())));
     }
 
     @Transactional
@@ -90,6 +99,7 @@ public class HouseService implements HouseServiceInterface {
         house.setDescription(houseReqDto.description());
         house.setImgUrl(houseReqDto.imgUrl());
         house.setPrice(houseReqDto.price());
-        return HouseMapper.toPublicHouseDto(this.houseRepository.save(house));
+        Double rating = this.ratingService.getRatingByHouseId(house.getHouseId());
+        return HouseMapper.toPublicHouseDto(this.houseRepository.save(house), rating);
     }
 }
