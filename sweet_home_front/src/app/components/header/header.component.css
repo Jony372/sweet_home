@@ -1,0 +1,36 @@
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.header__container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.header__nav-list{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+li{
+  list-style: none;
+  text-decoration: none;
+}
+
+.header__logo{
+  background-color: var(--bg-dark);
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 1rem;
+  border-radius: 1.5rem;
+  color: var(--bg-light);
+}
