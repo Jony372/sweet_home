@@ -1,7 +1,10 @@
 package com.turing.sweet.home.modules.cateogories.entity;
 
 import com.turing.sweet.home.audit.AuditableEntity;
+import com.turing.sweet.home.modules.houses.entity.HouseEntity;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -16,6 +19,9 @@ public class CategoryEntity extends AuditableEntity {
 
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HouseEntity> houses;
 
     public CategoryEntity() {
     }
