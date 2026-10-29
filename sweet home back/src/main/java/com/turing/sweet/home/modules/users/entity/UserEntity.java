@@ -11,7 +11,7 @@ public class UserEntity extends AuditableEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -45,6 +45,14 @@ public class UserEntity extends AuditableEntity {
         if(phone != null && !phone.isEmpty()) {
             this.phone = phone;
         }
+    }
+
+    @Override
+    public void delete() {
+        super.delete();
+        this.setUsername(null);
+        this.setEmail(null);
+        this.setPhone(null);
     }
 
     public Long getUserId() {
