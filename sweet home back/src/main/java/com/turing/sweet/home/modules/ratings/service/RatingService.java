@@ -5,6 +5,7 @@ import com.turing.sweet.home.exceptions.ResourceNotFoundException;
 import com.turing.sweet.home.modules.houses.entity.HouseEntity;
 import com.turing.sweet.home.modules.houses.repository.HouseRepository;
 import com.turing.sweet.home.modules.houses.service.HouseService;
+import com.turing.sweet.home.modules.ratings.dto.PublicRatingDto;
 import com.turing.sweet.home.modules.ratings.dto.PublicRatingsByHouseDto;
 import com.turing.sweet.home.modules.ratings.dto.RatingReqDto;
 import com.turing.sweet.home.modules.ratings.entity.RatingEntity;
@@ -74,5 +75,12 @@ public class RatingService implements RatingServiceInterface {
             throw new BadRequestException("No puedes eliminar una calificación que no es tuya");
         }
         this.ratingRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<PublicRatingDto> getAllRatings(int page, int elements) {
+        Pageable pageable = PageRequest.of(page, elements);
+        return this.ratingRepository.findAll(pageable)
+                .map(RatingMapper::toPublicRatingDto);
     }
 }

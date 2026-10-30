@@ -1,5 +1,6 @@
 package com.turing.sweet.home.modules.ratings.controller;
 
+import com.turing.sweet.home.modules.ratings.dto.PublicRatingDto;
 import com.turing.sweet.home.modules.ratings.dto.PublicRatingsByHouseDto;
 import com.turing.sweet.home.modules.ratings.dto.RatingReqDto;
 import com.turing.sweet.home.modules.ratings.service.RatingService;
@@ -43,5 +44,13 @@ public class RatingController {
     public ResponseEntity<Void> deleteRating(@PathVariable Long id, @AuthenticationPrincipal UserEntity user) {
         ratingService.deleteRatingById(user.getUserId(), id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<PublicRatingDto>> getAllRatings(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int elements
+    ){
+        return ResponseEntity.ok(ratingService.getAllRatings(page, elements));
     }
 }
