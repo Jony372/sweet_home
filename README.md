@@ -16,8 +16,8 @@ El archivo `.env` con las variables de entorno (base de datos, puertos) ya se en
 
 1. **Clonar el repositorio y entrar a la carpeta:**
    ```bash
-   git clone <url-del-repositorio>
-   cd <nombre-de-la-carpeta-del-proyecto>
+   git clone https://github.com/Jony372/sweet_home.git
+   cd sweet_home
    ```
 
 2. **Levantar los servicios con Docker Compose:**
@@ -37,27 +37,10 @@ Una vez que los contenedores estén en ejecución (`Up`), puedes acceder a la pl
 
 ## 🔐 Credenciales de Prueba (Administrador)
 
-Para evaluar el sistema de roles, modales restringidos y endpoints protegidos (creación de categorías y casas), inicia sesión en el Frontend o autoriza en Swagger con las siguientes credenciales:
+Para evaluar el sistema de roles, modales restringidos y endpoints protegidos (creación de categorías y casas), inicia sesión en el Frontend con las siguientes credenciales:
 
-* **Usuario / Correo:** `Admin`
+* **Usuario:** `Admin`
 * **Contraseña:** `Admin123`
-
-## 🛠️ Comandos Útiles de Docker
-
-Si necesitas interactuar con los contenedores o limpiar el entorno, aquí tienes los comandos principales:
-
-* **Ver los registros en vivo (útil para revisar logs de Spring Boot o Angular):**
-  ```bash
-  docker compose logs -f
-  ```
-* **Aplicar cambios si modificas el código de un servicio (ej. frontend):**
-  ```bash
-  docker compose up -d --build frontend
-  ```
-* **Detener y destruir los contenedores y volúmenes (Limpieza total del entorno):**
-  ```bash
-  docker compose down -v
-  ```
 
 ## 🏗️ Arquitectura y Tecnologías
 
