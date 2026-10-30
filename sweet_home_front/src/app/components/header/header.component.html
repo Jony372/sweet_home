@@ -3,23 +3,24 @@
     <a href="/" class="text-6xl font-bold text-bg-dark">Sweet Home</a>
     <nav>
       <ul class="hidden md:flex space-x-4">
-        <li><a href="#hero" class="text-bg-dark hover:text-accent">Inicio</a></li>
-        <li><a href="#catalog" class="text-bg-dark hover:text-accent">Catalogo</a></li>
-        <li><a href="#about" class="text-bg-dark hover:text-accent">Acerca de</a></li>
-        <li><a href="#reviews" class="text-bg-dark hover:text-accent">Reseñas</a></li>
-        <li><a href="#contact" class="text-bg-dark hover:text-accent">Contacto</a></li>
+        <li><a href="#hero" class="text-bg-dark hover:text-primary-dark">Inicio</a></li>
+        <li><a href="#catalog" class="text-bg-dark hover:text-primary-dark">Catalogo</a></li>
+        <li><a href="#about" class="text-bg-dark hover:text-primary-dark">Acerca de</a></li>
+        <li><a href="#reviews" class="text-bg-dark hover:text-primary-dark">Reseñas</a></li>
+        <li><a href="#contact" class="text-bg-dark hover:text-primary-dark">Contacto</a></li>
       </ul>
-      <div class="md:hidden">
+      <div [class.hidden]="!openMenu()" (click)="toggleMenu()">
         <button id="menu-toggle" class="text-bg-dark focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
       </div>
-      <ul id="mobile-menu" class="hidden flex-col space-y-2 mt-2 md:hidden">
-        <li><a href="#hero" class="text-bg-dark hover:text-accent">Inicio</a></li>
-        <li><a href="#catalog" class="text-bg-dark hover:text-accent">Catalogo</a></li>
-        <li><a href="#about" class="text-bg-dark hover:text-accent">Acerca de</a></li>
-        <li><a href="#reviews" class="text-bg-dark hover:text-accent">Reseñas</a></li>
-        <li><a href="#contact" class="text-bg-dark hover:text-accent">Contacto</a></li>
+      <button [class.hidden]="openMenu()" (click)="toggleMenu()">X</button>
+      <ul id="mobile-menu" [class.hidden]="openMenu()" class="flex-col space-y-2 mt-2 md:hidden">
+        <li><a href="#hero" class="text-bg-dark hover:text-primary-dark">Inicio</a></li>
+        <li><a href="#catalog" class="text-bg-dark hover:text-primary-dark">Catalogo</a></li>
+        <li><a href="#about" class="text-bg-dark hover:text-primary-dark">Acerca de</a></li>
+        <li><a href="#reviews" class="text-bg-dark hover:text-primary-dark">Reseñas</a></li>
+        <li><a href="#contact" class="text-bg-dark hover:text-primary-dark">Contacto</a></li>
       </ul>
     </nav>
   </div>

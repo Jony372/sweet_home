@@ -1,6 +1,6 @@
 <section id="catalog" class="px-4 py-8 w-full">
   <div class="max-w-7xl mx-auto container flex flex-col gap-4 text-center">
-    <h2 class="text-3xl font-bold text-accent pb-4">Catalogo de Propiedades</h2>
+    <h2 class="text-3xl font-bold text-primary-dark pb-4">Catalogo de Propiedades</h2>
     <div>
       <select class="bg-bg-dark border border-gray-300 text-white text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 " name="categorias" id="categorias" [(ngModel)]="categoryId" (change)="loadMore()">
         <option value="-1" selected>Todas las categorías</option>
@@ -15,7 +15,7 @@
       }
     </div>
     @if(catalogService.canLoadMore()){
-      <button (click)="loadMore()" class="bg-accent text-bg-light px-4 py-2 rounded-full w-max mx-auto hover:bg-accent-dark transition-colors">
+      <button (click)="loadMore()" class="bg-primary-dark text-bg-light px-4 py-2 rounded-full w-max mx-auto hover:bg-accent-dark transition-colors">
         Cargar más
       </button>
     }
