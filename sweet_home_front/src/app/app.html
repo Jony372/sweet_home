@@ -24,7 +24,9 @@
 @if (authService.isAdmin()) {
 
   @if(showHouseModal()){
-
+    <app-create-house
+      (close)="closeHouseModal()"
+    />
   }
 
   @if(showCategoryModal()){

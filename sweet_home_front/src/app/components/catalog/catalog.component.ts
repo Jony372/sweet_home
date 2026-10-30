@@ -1,5 +1,5 @@
 import { Component, effect, inject, model, signal } from '@angular/core';
-import { CatalogService } from './services/catalog.service';
+import { CatalogService } from '../../services/catalog.service';
 import { CardComponent } from './components/card/card.component';
 import { CategoriesService } from '../../services/categories.service';
 import { FormsModule } from '@angular/forms';

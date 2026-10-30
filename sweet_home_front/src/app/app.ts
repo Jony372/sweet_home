@@ -11,10 +11,11 @@ import { ToastComponent } from './components/toast/toast.component';
 import { AuthService } from './services/auth.service';
 import { AuthModalComponent } from './components/modals/auth-modal/auth-modal.component';
 import { CreateCategoryComponent } from './components/modals/create-category/create-category.component';
+import { CreateHouseComponent } from './components/modals/create-house/create-house.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ToastComponent, AuthModalComponent, NgClass, CreateCategoryComponent, HeaderComponent, HeroComponent, CatalogComponent, AboutUsComponent, ReviewsComponent, FooterComponent],
+  imports: [ToastComponent, AuthModalComponent, NgClass, CreateHouseComponent, CreateCategoryComponent, HeaderComponent, HeroComponent, CatalogComponent, AboutUsComponent, ReviewsComponent, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -30,7 +31,7 @@ export class App {
   }
 
   openHouseModal(){
-    this.openFabMenu.set(false);
+    this.showHouseModal.set(true);
   }
 
   openCategoryModal(){

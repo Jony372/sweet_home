@@ -1,8 +1,17 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { HouseModel } from '../models/house.model';
-import { PageModel } from '../../../models/page.model';
-import { environment } from '../../../../environments/environment';
+import { HouseModel } from '../components/catalog/models/house.model';
+import { PageModel } from '../models/page.model';
+import { environment } from '../../environments/environment';
+import { NotificationsService } from './notifications.service';
+
+interface HouseReqModel {
+  name: string;
+  description: string;
+  imgUrl: string;
+  price: number;
+  categoryId: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +21,7 @@ export class CatalogService {
   private apiUrl = `${environment.apiUrl}/houses`;
   private currentPage = signal<number>(0);
   private currentCategoryId = signal<number>(-1);
+  private notificationsService = inject(NotificationsService);
 
   public readonly canLoadMore = signal<boolean>(true);
   public catalog = signal<HouseModel[]>([]);
@@ -94,5 +104,16 @@ export class CatalogService {
         this.isLoading.set(false);
       }
     });
+  }
+
+  createHouse(houseData: HouseReqModel): void {
+    this.http.post<HouseModel>(this.apiUrl, houseData).subscribe({
+      next: (newHouse) => {
+        this.notificationsService.show('Casa creada exitosamente.', 'success');
+        this.currentPage.set(0);
+        this.catalog.set([]);
+        this.loadProducts(this.currentCategoryId());
+      }
+    })
   }
 }
