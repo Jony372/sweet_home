@@ -9,14 +9,19 @@ import { NotificationsService } from './services/notifications.service';
 import { NgClass } from '@angular/common';
 import { ToastComponent } from './components/toast/toast.component';
 import { AuthService } from './services/auth.service';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ToastComponent, HeaderComponent, HeroComponent, CatalogComponent, AboutUsComponent, ReviewsComponent, FooterComponent],
+  imports: [ToastComponent, AuthModalComponent , HeaderComponent, HeroComponent, CatalogComponent, AboutUsComponent, ReviewsComponent, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   public notificationsService = inject(NotificationsService);
   public authService = inject(AuthService);
+
+  closeModal(){
+    this.authService.showLoginModal.set(false);
+  }
 }

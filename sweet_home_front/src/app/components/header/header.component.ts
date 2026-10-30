@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,25 @@ import { Component, signal } from '@angular/core';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  authService = inject(AuthService);
   openMenu = signal<boolean>(false);
+  openProfileMenu = signal<boolean>(false);
 
   toggleMenu() {
     this.openMenu.update((current) => !current);
+  }
+
+  openAuthModal() {
+    this.openProfileMenu.set(false);
+    this.authService.showLoginModal.set(true);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.openProfileMenu.set(false);
+  }
+
+  toggleProfileMenu() {
+    this.openProfileMenu.update((current) => !current);
   }
 }

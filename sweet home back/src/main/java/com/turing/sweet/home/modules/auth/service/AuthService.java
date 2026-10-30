@@ -29,13 +29,13 @@ public class AuthService {
     @Transactional
     public void register(RegisterReqDto registerReqDto) {
         if(this.userRepository.existsByUsername(registerReqDto.username())) {
-            throw new IllegalArgumentException("El nombre de usuario ya está en uso");
+            throw new BadRequestException("El nombre de usuario ya está en uso");
         }
         if(!registerReqDto.email().isEmpty() && this.userRepository.existsByEmail(registerReqDto.email())) {
-            throw new IllegalArgumentException("El correo electrónico ya está en uso");
+            throw new BadRequestException("El correo electrónico ya está en uso");
         }
         if(!registerReqDto.phone().isEmpty() && this.userRepository.existsByPhone(registerReqDto.phone())) {
-            throw new IllegalArgumentException("El teléfono ya está en uso");
+            throw new BadRequestException("El teléfono ya está en uso");
         }
         UserEntity user = new UserEntity(
                 registerReqDto.name(),
