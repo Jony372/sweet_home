@@ -1,27 +1,40 @@
-<header class="w-full px-4">
-  <div class="container mx-auto max-w-7xl flex items-center justify-between ">
-    <a href="/" class="text-6xl font-bold text-bg-dark">Sweet Home</a>
+<header class="w-full px-4 bg-bg-light relative shadow-sm">
+  <div class="container mx-auto max-w-7xl flex items-center justify-between py-4">
+    <!-- Responsive logo -->
+    <a href="/" class="text-3xl md:text-5xl font-bold text-bg-dark">Sweet Home</a>
+
     <nav>
-      <ul class="hidden md:flex space-x-4">
-        <li><a href="#hero" class="text-bg-dark hover:text-primary-dark">Inicio</a></li>
-        <li><a href="#catalog" class="text-bg-dark hover:text-primary-dark">Catalogo</a></li>
-        <li><a href="#about" class="text-bg-dark hover:text-primary-dark">Acerca de</a></li>
-        <li><a href="#reviews" class="text-bg-dark hover:text-primary-dark">Reseñas</a></li>
-        <li><a href="#contact" class="text-bg-dark hover:text-primary-dark">Contacto</a></li>
+      <!-- Desktop menu -->
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="#hero" class="text-bg-dark hover:text-accent font-medium">Inicio</a></li>
+        <li><a href="#catalog" class="text-bg-dark hover:text-accent font-medium">Catalogo</a></li>
+        <li><a href="#about" class="text-bg-dark hover:text-accent font-medium">Acerca de</a></li>
+        <li><a href="#reviews" class="text-bg-dark hover:text-accent font-medium">Reseñas</a></li>
+        <li><a href="#contact" class="text-bg-dark hover:text-accent font-medium">Contacto</a></li>
       </ul>
-      <div [class.hidden]="!openMenu()" (click)="toggleMenu()">
-        <button id="menu-toggle" class="text-bg-dark focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+
+      <!-- Mobile toggles (Hidden on desktop) -->
+      <div class="md:hidden flex items-center">
+        <button [class.hidden]="openMenu()" (click)="toggleMenu()" class="text-bg-dark focus:outline-none p-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <button [class.hidden]="!openMenu()" (click)="toggleMenu()" class="text-bg-dark focus:outline-none p-2 text-2xl font-bold">
+          X
         </button>
       </div>
-      <button [class.hidden]="openMenu()" (click)="toggleMenu()">X</button>
-      <ul id="mobile-menu" [class.hidden]="openMenu()" class="flex-col space-y-2 mt-2 md:hidden">
-        <li><a href="#hero" class="text-bg-dark hover:text-primary-dark">Inicio</a></li>
-        <li><a href="#catalog" class="text-bg-dark hover:text-primary-dark">Catalogo</a></li>
-        <li><a href="#about" class="text-bg-dark hover:text-primary-dark">Acerca de</a></li>
-        <li><a href="#reviews" class="text-bg-dark hover:text-primary-dark">Reseñas</a></li>
-        <li><a href="#contact" class="text-bg-dark hover:text-primary-dark">Contacto</a></li>
-      </ul>
     </nav>
   </div>
+
+  <!-- Mobile Menu -->
+  <!-- Menú Móvil con transiciones -->
+<ul
+  class="absolute top-full left-0 w-full bg-bg-light flex flex-col space-y-4 px-6 py-6 md:hidden shadow-lg z-50 transition-all duration-300 ease-in-out"
+  [ngClass]="openMenu() ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'"
+>
+  <li><a (click)="toggleMenu()" href="#hero" class="block text-bg-dark hover:text-accent text-lg">Inicio</a></li>
+  <li><a (click)="toggleMenu()" href="#catalog" class="block text-bg-dark hover:text-accent text-lg">Catalogo</a></li>
+  <li><a (click)="toggleMenu()" href="#about" class="block text-bg-dark hover:text-accent text-lg">Acerca de</a></li>
+  <li><a (click)="toggleMenu()" href="#reviews" class="block text-bg-dark hover:text-accent text-lg">Reseñas</a></li>
+  <li><a (click)="toggleMenu()" href="#contact" class="block text-bg-dark hover:text-accent text-lg">Contacto</a></li>
+</ul>
 </header>

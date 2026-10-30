@@ -9,7 +9,7 @@
         }
       </select>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-stretch gap-4">
       @for (house of catalogService.catalog(); track $index) {
         <app-card [houseInfo]="house" />
       }
