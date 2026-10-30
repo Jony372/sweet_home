@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
@@ -17,13 +19,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<PublicCategoryDto>> getAllCategories(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int elements,
-            @RequestParam(defaultValue = "Name") String sortBy,
-            @RequestParam(defaultValue = "ASC") String sortDirection
-    ){
-        Page<PublicCategoryDto> categories = this.categoryService.getAllCategories(page, elements, sortBy, sortDirection);
+    public ResponseEntity<List<PublicCategoryDto>> getAllCategories(){
+        List<PublicCategoryDto> categories = this.categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 

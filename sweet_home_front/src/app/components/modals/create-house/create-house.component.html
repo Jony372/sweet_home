@@ -1,0 +1,61 @@
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 py-6">
+  <!-- max-h-full y overflow-y-auto aseguran que si la pantalla es pequeña, se pueda hacer scroll dentro del modal -->
+  <div class="bg-bg-light w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative animate-fade-in-up max-h-full overflow-y-auto">
+
+    <button (click)="closeModal()" class="absolute top-4 right-4 text-bg-dark hover:text-accent transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+
+    <div class="px-8 py-8">
+      <h2 class="text-2xl font-bold text-primary-dark mb-6">Añadir Nueva Casa</h2>
+
+      <form (submit)="onSubmit($event)" class="space-y-4">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Nombre -->
+          <div class="md:col-span-2">
+            <label class="block text-sm font-semibold text-bg-dark mb-1">Título / Nombre</label>
+            <input type="text" placeholder="Ej. Casa en la playa" [formField]="houseForm.name"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none bg-white text-gray-900">
+          </div>
+
+          <!-- Precio -->
+          <div>
+            <label class="block text-sm font-semibold text-bg-dark mb-1">Precio (USD)</label>
+            <input type="number"  step="0.01" placeholder="Ej. 150000" [formField]="houseForm.price"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none bg-white text-gray-900">
+          </div>
+
+          <!-- Categoría (Asume que pasas el array de categorías como @Input o lo inyectas) -->
+          <div>
+            <label class="block text-sm font-semibold text-bg-dark mb-1">Categoría</label>
+            <select [formField]="houseForm.categoryId" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none bg-white text-gray-900">
+              <option value="" disabled selected>Selecciona una...</option>
+              @for (category of categoriesService.categories(); track category.id) {
+                <option [value]="category.id">{{ category.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <!-- URL de la Imagen -->
+        <div>
+          <label class="block text-sm font-semibold text-bg-dark mb-1">URL de la Imagen</label>
+          <input type="url" placeholder="https://ejemplo.com/imagen.jpg" [formField]="houseForm.imgUrl"
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none bg-white text-gray-900">
+        </div>
+
+        <!-- Descripción -->
+        <div>
+          <label class="block text-sm font-semibold text-bg-dark mb-1">Descripción</label>
+          <textarea rows="3" placeholder="Detalles de la propiedad..." [formField]="houseForm.description"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none bg-white text-gray-900 resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-primary-dark text-bg-light py-3 rounded-lg font-bold hover:bg-accent transition-colors mt-6 cursor-pointer">
+          Publicar Propiedad
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

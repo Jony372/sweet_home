@@ -12,6 +12,7 @@ public class UserMapper {
                 userEntity.getLastName(),
                 userEntity.getEmail(),
                 userEntity.getPhone(),
+                userEntity.getAdmin(),
                 userEntity.getCreatedAt(),
                 userEntity.getUpdatedAt()
         );

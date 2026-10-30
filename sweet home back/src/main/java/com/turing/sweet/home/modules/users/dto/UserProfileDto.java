@@ -9,6 +9,7 @@ public record UserProfileDto(
         String lastName,
         String email,
         String phone,
+        Boolean isAdmin,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {

@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme{
+  --color-primary-dark: #2E403F;
+  --color-accent: #8B9D90;
+  --color-primary-light: #BC88FF;
+  --color-bg-dark: #401123;
+  --color-bg-light: #CDC7D9;
+}
+
+/* :root {
+  --bg-dark: #401123;
+  --bg-light: #CDC7D9;
+
+  --primary-dark: #3C0273;
+  --accent: #A041F2;
+  --primary-light: #BC88FF;
+} */

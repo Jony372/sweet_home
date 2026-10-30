@@ -1,0 +1,10 @@
+<section id="reviews" class="w-full px-4 pt-8 pb-12">
+  <div class="max-w-7xl mx-auto w-full">
+    <h2 class="text-3xl font-bold text-primary-dark text-center mb-8">Reseñas de nuestros clientes</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-fit mx-auto">
+      @for (review of this.ratingService.ratings(); track $index) {
+        <app-review-card [rating]="review"/>
+      }
+    </div>
+  </div>
+</section>
