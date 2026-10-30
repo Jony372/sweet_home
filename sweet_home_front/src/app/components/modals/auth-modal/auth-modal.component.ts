@@ -1,7 +1,7 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { form, required, FormField } from '@angular/forms/signals';
-import { RegisterReqModel } from '../../models/register-req.model';
+import { RegisterReqModel } from '../../../models/register-req.model';
 
 @Component({
   selector: 'app-auth-modal',

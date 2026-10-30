@@ -20,6 +20,10 @@ export class AuthService {
   currentUser = signal<UserModel | null>(null);
   isAdmin = computed(() => this.currentUser()?.isAdmin ?? false);
 
+  constructor() {
+    this.getDataFromLocalStorage();
+  }
+
   login(username: string, password: string, rememberMe: boolean):Observable<LoginResponseModel> {
     return this.http.post<LoginResponseModel>(`${this.apiUrl}/login`, { username, password, rememberMe }).pipe(
       tap(response => {
@@ -45,5 +49,13 @@ export class AuthService {
     localStorage.removeItem('user');
     this.currentUser.set(null);
     this.showLoginModal.set(false);
+  }
+
+  getDataFromLocalStorage(): void {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    if (token && user) {
+      this.currentUser.set(JSON.parse(user));
+    }
   }
 }

@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { CategoryModel } from '../models/cateogory.model';
-import { environment } from '../../../../environments/environment';
+import { CategoryModel } from '../components/catalog/models/cateogory.model';
+import { environment } from '../../environments/environment';
+
+interface CategoryReqModel {
+  name: string;
+  description: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +36,17 @@ export class CategoriesService {
       },
       complete: () => {
         this.isLoading.set(false);
+      }
+    });
+  }
+
+  createCategory(categoryData: CategoryReqModel): void {
+    this.http.post<CategoryModel>(this.apiUrl, categoryData).subscribe({
+      next: (newCategory) => {
+        this.categories.update((currentCategories) => [...currentCategories, newCategory]);
+      },
+      error: (err) => {
+        this.error.set(err.message);
       }
     });
   }
