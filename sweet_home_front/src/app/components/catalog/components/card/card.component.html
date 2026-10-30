@@ -1,1 +1,35 @@
-<p>card works!</p>
+<article class="border-2 border-bg-dark rounded-lg max-w-xs w-full h-full mx-auto flex flex-col">
+    <header class="flex flex-col px-4 pt-4">
+      <img
+        [src]="houseInfo().imgUrl"
+        [alt]="houseInfo().name"
+        class="rounded-lg w-full h-48 object-cover"
+      />
+    </header>
+    <div class="flex flex-col px-4 py-2 grow">
+      <div class="flex justify-between items-center py-1 text-accent font-medium">
+        <p class="text-sm text-text-dark">{{ houseInfo().category }}</p>
+        <div class="text-sm text-text-dark flex items-center gap-1">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" /></svg>
+          </span>
+          <p>{{ houseInfo().rating }}</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2 -mt-2 text-left">
+        <h3 class="text-xl font-bold text-bg-dark line-clamp-1" [title]="houseInfo().name">{{ houseInfo().name }}</h3>
+        <p class="text-sm text-bg-dark line-clamp-3">{{ houseInfo().description }}</p>
+      </div>
+    </div>
+    <footer class="flex justify-between items-center border-t-2 border-bg-dark">
+      <p class="text-lg font-bold text-accent px-4 py-2">
+        {{ houseInfo().price |currency:'USD':'symbol' }}
+      </p>
+      <div class="flex flex-col px-2">
+        <p class="text-xs font-regular text-bg-dark">Actualizado:</p>
+        <p class="text-xs font-regular text-bg-dark">
+          {{ houseInfo().updatedAt | date:'short' }}
+        </p>
+      </div>
+    </footer>
+</article>
