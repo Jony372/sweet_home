@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NotificationsService } from './services/notifications.service';
 import { NgClass } from '@angular/common';
 import { ToastComponent } from './components/toast/toast.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,4 +18,5 @@ import { ToastComponent } from './components/toast/toast.component';
 })
 export class App {
   public notificationsService = inject(NotificationsService);
+  public authService = inject(AuthService);
 }
