@@ -1,6 +1,14 @@
 <section id="catalog" class="px-4 py-8 w-full">
   <div class="max-w-7xl mx-auto container flex flex-col gap-4 text-center">
     <h2 class="text-3xl font-bold text-accent pb-4">Catalogo de Propiedades</h2>
+    <div>
+      <select class="bg-bg-dark border border-gray-300 text-white text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5 " name="categorias" id="categorias" [(ngModel)]="categoryId" (change)="loadMore()">
+        <option value="-1" selected>Todas las categorías</option>
+        @for (category of categoriesService.categories(); track $index) {
+          <option value="{{ category.id }}">{{ category.name }}</option>
+        }
+      </select>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       @for (house of catalogService.catalog(); track $index) {
         <app-card [houseInfo]="house" />

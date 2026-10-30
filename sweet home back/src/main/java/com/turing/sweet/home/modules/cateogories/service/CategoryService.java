@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CategoryService implements CategoryServiceInterface {
     private final CategoryRepository categoryRepository;
@@ -32,10 +34,10 @@ public class CategoryService implements CategoryServiceInterface {
     }
 
     @Override
-    public Page<PublicCategoryDto> getAllCategories(int page, int elements, String sortBy, String sortDirection) {
-        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
-        Pageable pageable = PageRequest.of(page,elements, sort);
-        return this.categoryRepository.findAllByDeletedAtIsNull(pageable).map(CategoryMapper::toPublicCategoryDto);
+    public List<PublicCategoryDto> getAllCategories() {
+        return this.categoryRepository.findAllByDeletedAtIsNull().stream()
+            .map(CategoryMapper::toPublicCategoryDto)
+            .toList();
     }
 
     @Override
