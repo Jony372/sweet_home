@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_data:/data/postgres
+
+  backend:
+    build:
+      context: ./sweet home back
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./sweet_home_front # Ej: ./sweet-home-frontend
+    ports:
+      - '4200:80' # Mapea el puerto 4200 de tu computadora al puerto 80 de Nginx
+    depends_on:
+      - backend
+
+volumes:
+  pg_data:
